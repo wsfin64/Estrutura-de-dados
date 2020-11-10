@@ -1,0 +1,50 @@
+ARVORES BINÁRIAS
+
+Os nos possuem dois apontadores, um para a esquerda outro para a direita estes  nos sao chamados de filhos
+
+TIPO DE ARVORES BINARIAS:
+
+    - ESTRITAMENTE BINARIA:
+        Todos os nos nao folhas possuem filhos a esquerda e a direita
+        a raiz possui profundidade zero
+
+
+    - COMPLETA:
+        Todos os nos folhas estao no mesmo nivel de profunidade
+
+        2^d -> Sendo d o nível de profundidade, temos com isso o numero de elementos em cada nivel
+
+        2^d -1 -> Nos nao folhas.
+
+        tn = 2^(d + 1) - 1 -> Total de nos em uma arvore binaria completa
+
+    - QUASE COMPLETAS:
+        Cada folha deve estar no nivel d ou nivel d-1
+
+        A construcao da arvore se da de cima para baixo, da esquerda para a direita
+
+        OS nos a esquerda de qualquer no tem cardinalidade 2p, onde o p é a cardinalidade do pai, e no vetor é
+        representado pelo indice 2p + 1.
+
+        Os nos da direita de qualquer no tem cardinalidade 2p + 1, onde p é a cardinalidade do pai e no vetor, é
+        representado pelo indice 2p + 2.
+
+
+PERCURSO EM ARVORES BINARIAS
+
+    TIPOS DE PERCURSO:
+
+        Pré-Ordem:
+            1 - visita a raiz
+            2 - lado esquerdo
+            3 - lado direito
+
+        Ordem:
+            1 - lado esquerdo
+            2 - raiz
+            3 - lado direito
+
+        Pos-Ordem:
+            1 - lado esquerdo
+            2 - lado direito
+            3 - raiz
