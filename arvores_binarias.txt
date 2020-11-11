@@ -48,3 +48,10 @@ PERCURSO EM ARVORES BINARIAS
             1 - lado esquerdo
             2 - lado direito
             3 - raiz
+
+TRANSFORMAÇÃO DE ÁRVORES NÃO BINARIAS EM ARVORES BINARIAS
+
+1 - Cada nó da arvore binaria tera como filho a esquerda o filho mais a esquerda da arvore dele na arvore não binaria.
+
+2 - Cada nó tera como filho a direita o seu irmao mais proximo da arvore nao binaria.
+
