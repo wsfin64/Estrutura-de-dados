@@ -112,7 +112,7 @@ class BinarySearchTree:
 
     def deleteTree(self):
         # garbage collector fará o trabalho de remoção dos nós automaticamente. 
-        self.root = None
+        self.__root = None
 
     def deleteNode(self, key):
         self.__deleteNode(self.__root, key)
@@ -177,10 +177,39 @@ class BinarySearchTree:
     # com o maior valor de chave encontrada na árvore. Note que a árvore
     # inteira não precisa ser percorrida 
     def __maxValueNode(self, node):
-        current = node 
-  
+        current = node
+
          # loop para baixo a fim de encontrar a folha mais a direita
         while(current.rightChild is not None): 
             current = current.rightChild
   
         return current
+
+    def frequencia(self, chave):
+        if self.__root is not None:
+            return self.__frequencia(chave, self.__root)
+        else:
+            return None
+
+    def __frequencia(self, chave, node):
+
+        if chave != node.getValue():
+
+            if chave > node.getValue() and node.getRightChild() is not None:
+                return self.__frequencia(chave, node.getRightChild())
+
+            elif chave < node.getValue() and node.getLeftChild() is not None:
+                return self.__frequencia(chave, node.getLeftChild())
+
+        if chave == node.getValue():
+
+            if chave == node.getValue() and node.getRightChild() is not None:
+                return 1 + self.__frequencia(chave, node.getRightChild())
+
+            if chave == node.getValue() and node.getLeftChild() is not None:
+                return 1 + self.__frequencia(chave, node.getLeftChild())
+
+            else:
+                return 1
+        else:
+            return 0
