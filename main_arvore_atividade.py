@@ -3,8 +3,9 @@ from binarySearchTreeException import BinarySearchTreeException
 
 arvore = BinarySearchTree()
 
-try:
-    while True:
+
+while True:
+    try:
         print('(d) Digitar um texto')
         print('(e) Exibir palavras do texto Ascendente/Descendente')
         print('(c) Exibir frequência de ocorrência das palavras')
@@ -24,14 +25,31 @@ try:
 
         elif escolha in 'eE':
             if not arvore.isEmpty():
+                print('----------------------')
+                print('Em ordem Ascendente:')
                 arvore.inorder()
+                print('Em ordem Descendente:')
+                arvore.inorder_descendente()
+                print('----------------------')
+
             else:
                 raise BinarySearchTreeException('Árvore vazia')
 
-        # ESPAÇO PARA A FREQUENCIA #
+        elif escolha in 'cC':
+            if not arvore.isEmpty():
+                print('----------------------------------------')
+                arvore.listar()
+                array = arvore.getValues()
+                array_filtrado = set(array)
+                for valor in array_filtrado:
+                    print(f'{valor}: {arvore.frequencia(valor)}')
+                    # Detalhes da implementação do metodo frequencia está na classe BinarySearchTree
+                print('----------------------------------------')
+            else:
+                raise BinarySearchTreeException('A arvore esta vazia')
 
         elif escolha in 'sS':
             break
 
-except BinarySearchTreeException as err:
-    print(err)
+    except BinarySearchTreeException as err:
+        print(err)

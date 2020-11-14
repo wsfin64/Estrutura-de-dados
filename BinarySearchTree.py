@@ -38,12 +38,16 @@ class BinarySearchTree:
     # Construtor que inicializa uma BST sem nó raiz
     def __init__(self):
         self.__root = None
+        self.__values = []
 
     def getRoot(self):
         return self.__root
 
     def isEmpty(self):
         return self.__root == None
+
+    def getValues(self):
+        return self.__values
 
     # adiciona um novo nó automaticamente, na posição correta
     def add(self, data):
@@ -80,6 +84,9 @@ class BinarySearchTree:
         else:
             return None
 
+    def listar(self):
+        self.preorder()
+
     def preorder(self):
         self.__preorder(self.__root)
         print()
@@ -88,12 +95,17 @@ class BinarySearchTree:
         self.__inorder(self.__root)
         print()
 
+    def inorder_descendente(self):
+        self.__inorder_descendente(self.__root)
+        print()
+
     def postorder(self):
         self.__postorder(self.__root)
         print()
         
     def __preorder(self, node):
         if( node != None):
+            self.__values.append(node.data)
             print(f'{node.data} ', end='')
             self.__preorder(node.leftChild)
             self.__preorder(node.rightChild)
@@ -104,6 +116,12 @@ class BinarySearchTree:
             print(f'{node.data} ', end='')
             self.__inorder(node.rightChild)
 
+    def __inorder_descendente(self, node):
+        if( node != None):
+            self.__inorder_descendente(node.rightChild)
+            print(f'{node.data} ', end='')
+            self.__inorder_descendente(node.leftChild)
+
     def __postorder(self, node):
         if( node != None):
             self.__postorder(node.leftChild)
@@ -113,6 +131,7 @@ class BinarySearchTree:
     def deleteTree(self):
         # garbage collector fará o trabalho de remoção dos nós automaticamente. 
         self.__root = None
+        self.__values = []
 
     def deleteNode(self, key):
         self.__deleteNode(self.__root, key)
