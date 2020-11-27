@@ -3,22 +3,26 @@ from Computador import Computador
 from Recurso import Recurso
 from Job import Job
 from ListaEncadeada import ListaEncadeada, ListaException
-
+from BandaInternet import BandaInternet
 
 pcs = ListaEncadeada()
 jobs = FilaEncadeada()
+banda = BandaInternet(10)
+
 
 while True:
     try:
 
         print(f'Computadores Cadastrados: {pcs}')
         print(f'Jobs em execução: {jobs.tamanho()} | {jobs}')
+        print(f'Largura da banda de internet: {banda.largura} MB')
         print('--------------------------------')
         print('1 - Cadastrar computador')
         print('2 - Inserir Job')
         print('3 - Finalizar Job')
         print('4 - Mostrar nó cabeça')
-        print('5 - Sair')
+        print('5 - ALterar largura de banda')
+        print('6 - Sair')
 
         entrada = int(input('Escolha a opção desejada : '))
 
@@ -73,6 +77,10 @@ while True:
             print(jobs.mostrar_cabeca())
 
         elif entrada == 5:
+            nova_banda = int(input('Informe a nova banda da internet em MB: '))
+            banda.largura = nova_banda
+
+        elif entrada == 6:
             print('Programa finalizado')
             break
 
