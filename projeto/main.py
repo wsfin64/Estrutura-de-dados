@@ -22,7 +22,8 @@ while True:
         print('3 - Finalizar Job')
         print('4 - Mostrar nó cabeça')
         print('5 - ALterar largura de banda')
-        print('6 - Sair')
+        print('6 - Importar dados')
+        print('7 - Sair')
 
         entrada = int(input('Escolha a opção desejada : '))
 
@@ -81,6 +82,42 @@ while True:
             banda.largura = nova_banda
 
         elif entrada == 6:
+            lista_maquinas = []
+            arquivo = open('computadores.txt')
+
+            # Quebrando as linhas do txt e salvando em uma lista
+            maquina = arquivo.read().split('\n')
+
+            # Qubrando as strings da lista maquina e adicionado na lista_maquinas
+            for i in maquina:
+                maquina_filtrada = i.split()
+                lista_maquinas.append(maquina_filtrada)
+
+            for i in range(len(lista_maquinas)):
+                ip = str(lista_maquinas[i][0])
+                host = str(lista_maquinas[i][1])
+                prioridade = lista_maquinas[i][2]
+                pcs.insereFim(Computador(ip, host, prioridade))
+
+            # ------------- LENDO O ARQUIVO RECURSOS.TXT ------------------#
+
+            lista_recursos = []
+            arquivo_recursos = open('recursos.txt')
+
+            recurso = arquivo_recursos.read().split('\n')
+
+            for i in recurso:
+                recurso_filtrado = i.split()
+                lista_recursos.append(recurso_filtrado)
+
+            for i in range(len(lista_recursos)):
+                tamanho = float(lista_recursos[i][0])
+                nome = str(lista_recursos[i][1])
+                arquivo = Recurso(tamanho, nome)
+                job = Job(lista_maquinas[i], arquivo)
+                jobs.enfileirar(job)
+
+        elif entrada == 7:
             print('Programa finalizado')
             break
 

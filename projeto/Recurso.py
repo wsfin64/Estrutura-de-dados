@@ -13,4 +13,4 @@ class Recurso:
         return float(self.__tamanho)
 
     def __str__(self):
-        return f'{self.__nome} - {self.__tamanho}MB'
+        return f'{self.__nome} - {self.__tamanho}KB'
