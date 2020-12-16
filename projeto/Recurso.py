@@ -12,5 +12,10 @@ class Recurso:
     def tamanho(self):
         return float(self.__tamanho)
 
+    @tamanho.setter
+    def tamanho(self, novo_tamanho):
+        self.__tamanho = novo_tamanho
+
+
     def __str__(self):
         return f'{self.__nome} - {self.__tamanho}KB'

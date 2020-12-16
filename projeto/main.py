@@ -6,8 +6,9 @@ from ListaEncadeada import ListaEncadeada, ListaException
 from BandaInternet import BandaInternet
 
 pcs = ListaEncadeada()
-jobs = FilaEncadeada()
+jobs = ListaEncadeada()
 banda = BandaInternet(10)
+donwload_finalizados = FilaEncadeada()
 
 
 while True:
@@ -20,10 +21,11 @@ while True:
         print('1 - Cadastrar computador')
         print('2 - Inserir Job')
         print('3 - Finalizar Job')
-        print('4 - Mostrar nó cabeça')
+        print('4 - Mostrar downloads finalizados')
         print('5 - ALterar largura de banda')
         print('6 - Importar dados')
-        print('7 - Sair')
+        print('7 - Simulação')
+        print('8 - Sair')
 
         entrada = int(input('Escolha a opção desejada : '))
 
@@ -60,22 +62,20 @@ while True:
                     tamanho_recurso = float(input('Informe o tamanho do arquivo em MB: '))
                     arquivo = Recurso(tamanho_recurso, nome_recurso)
                     job = Job(pc, arquivo)
-                    jobs.enfileirar(job)
+                    jobs.insereFim(job)
                     contador += 1
 
             if contador == 0:
-                raise FilaException('A máquina informada não está cadastrada')
+                raise ListaException('A máquina informada não está cadastrada')
 
         elif entrada == 3:
             if pcs.vazia():
-                raise FilaException('Não há computadores cadastrados! ')
+                raise ListaException('Não há computadores cadastrados! ')
 
-            jobs.desenfileirar()
+            jobs.removeInicio()
 
         elif entrada == 4:
-            if jobs.tamanho() == 0:
-                raise FilaException('A fila de jobs está vazia')
-            print(jobs.mostrar_cabeca())
+            print(f'Jobs Finalizados: {donwload_finalizados}')
 
         elif entrada == 5:
             nova_banda = int(input('Informe a nova banda da internet em MB: '))
@@ -115,9 +115,48 @@ while True:
                 nome = str(lista_recursos[i][1])
                 arquivo = Recurso(tamanho, nome)
                 job = Job(lista_maquinas[i], arquivo)
-                jobs.enfileirar(job)
+                jobs.insereFim(job)
 
         elif entrada == 7:
+            ciclo = 1
+            diferenca = 0
+            download = (banda.largura * 1024) / 8
+            transmissao = 0
+            lista_indices = []
+            indice = jobs.tamanho()
+            while True:
+
+                if jobs.tamanho() == 1:
+                    break
+
+                print(f'Ciclo atual: {ciclo}')
+
+                for obj in range(1, indice):
+                    ob = jobs.elemento(obj)
+                    print(f'#{obj} - {ob.computador[0]} -------- {ob.recurso.nome} ------- Velocidade Download {transmissao:.2f}kb/s  ------- Baixados: {diferenca:.2f}KB/{ob.recurso.tamanho:.2f}KB')
+
+                    if diferenca >= ob.recurso.tamanho:
+                        maq = ob.computador[0]
+                        lista_indices.append(maq)
+                    transmissao = download / indice
+                diferenca = diferenca + transmissao
+                ciclo += 1
+
+                if len(lista_indices) > 0:
+                    for i in range(len(lista_indices)):
+                        for obj in range(1, indice):
+                            ob = jobs.elemento(obj)
+                            if lista_indices[i] == ob.computador[0]:
+                                donwload_finalizados.enfileirar(jobs.elemento(obj))
+                                jobs.remover(obj)
+                                indice -= 1
+
+                opcao = input('Aperte enter para o proximo ciclo ou tecle s para sair: ')
+                if opcao == 's':
+                    break
+
+            print('Simulação finalizada!')
+        elif entrada == 8:
             print('Programa finalizado')
             break
 

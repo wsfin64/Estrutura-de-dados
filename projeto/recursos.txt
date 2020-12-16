@@ -1,5 +1,6 @@
-488500 video.mp4
+850 video.mp4
 82 imagem.jpg
-28254 arquivo.rar
-128300 windows_98.iso
-5003 musica.mp3
+8254 arquivo.rar
+2830 windows_98.iso
+300 musica.mp3
+1280 arquivo.txt
